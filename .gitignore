@@ -1,38 +1,13 @@
-# Virtual environment
-venv/
-env/
-.venv/
-
-# Python
+# Python cache
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
+*.pyc
 
-# Jupyter Notebook
-.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# Data files
-*.csv
-*.json
-*.pkl
-*.h5
-*.hdf5
-
-# Model files
-*.pt
-*.pth
-*.ckpt
-*.weights
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
+# Mac system files
 .DS_Store
-Thumbs.db
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Віртуальне оточення
+venv/
+.env/
