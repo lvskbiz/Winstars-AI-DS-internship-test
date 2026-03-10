@@ -64,38 +64,58 @@ Task 1/
 
 This project builds an ML pipeline combining NLP (NER) and Computer Vision (image classification) to verify user statements about animals in images.
 
-### Solution Structure
-- Jupyter notebook for exploratory data analysis (EDA)
-- Parametrized train/inference scripts for NER (transformer-based model)
-- Parametrized train/inference scripts for Image Classification
-- Python script for the pipeline (takes text and image, outputs boolean)
+### Dataset
+- The animal classification dataset should contain at least 10 distinct animal classes (e.g., cat, dog, cow, horse, sheep, lion, tiger, bear, fox, wolf).
+- Each class must have a sufficient number of images for training and evaluation.
+- Dataset structure: each class in a separate folder, images named arbitrarily.
 
-### Approach
-1. **Dataset**: Animal classification dataset with at least 10 classes.
-2. **NER Model**: Transformer-based model (e.g., BERT) trained to extract animal names from text.
-3. **Image Classification Model**: Neural network/CNN trained to classify animal images.
-4. **Pipeline**: Accepts text and image, extracts animal entity from text, classifies image, and checks if they match.
+### Exploratory Data Analysis (EDA)
+- The EDA notebook visualizes class distribution, sample images, and basic statistics.
+- Helps identify class imbalance and dataset quality.
 
-### How to Run Task 2
-1. Install dependencies:
-   ```bash
-   pip install -r Task\ 2/requirements.txt
-   ```
-2. Run EDA notebook:
-   - Open `Task 2/eda.ipynb` in Jupyter.
-3. Train/infer NER and image models using provided scripts.
-4. Run pipeline script with text and image inputs.
+### NER Model
+- Uses a transformer-based model (e.g., BERT, DistilBERT) for extracting animal names from text.
+- Training data: sentences containing animal names, annotated in BIO format.
+- Scripts provided for training and inference.
+- Model outputs entity labels for each token, allowing extraction of animal names from user input.
 
-### Task 2 Structure
+### Image Classification Model
+- Uses a neural network or CNN (e.g., TensorFlow/Keras) for animal image classification.
+- Images are resized, normalized, and split into train/validation/test sets.
+- Scripts provided for training and inference.
+- Model predicts the animal class for a given image.
+
+### Pipeline Script
+- Accepts two inputs: a text message and an image.
+- Steps:
+  1. Extract animal entity from text using NER model.
+  2. Classify the animal in the image using the image model.
+  3. Compare results and output a boolean (True if text matches image, False otherwise).
+- Handles flexible user input (e.g., "A lion is in the photo", "I see a dog", etc.).
+
+### Example Usage
+- User provides: "There is a cat in the picture." and an image of a cat.
+- Pipeline extracts "cat" from text, classifies image as "cat", returns True.
+- If image is a dog, returns False.
+
+### Edge Cases
+- Handles synonyms and plural forms (e.g., "cats", "dogs").
+- Handles sentences with multiple animals (returns True if any match).
+- Handles images with multiple animals (advanced: multi-label classification).
+
+### Folder Structure
 ```
 Task 2/
-├── ner/
-├── image_classification/
-├── eda.ipynb
-├── README.md
-├── requirements.txt
+├── ner/                  # NER scripts and models
+├── image_classification/ # Image classification scripts and models
+├── eda.ipynb             # Jupyter notebook for EDA and demo
+├── pipeline.py           # Pipeline script (text + image → boolean)
+├── README.md             # Task 2 documentation
+├── requirements.txt      # Dependencies
 ```
 
 ---
+
+For more details, see the EDA notebook and script documentation in each folder.
 
 Both tasks are documented and structured for clarity, reproducibility, and easy setup. All code and instructions are in English.
