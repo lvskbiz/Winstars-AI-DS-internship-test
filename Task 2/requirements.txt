@@ -1,8 +1,9 @@
-transformers
+accelerate
+datasets
+matplotlib
+pandas
+pillow
 scikit-learn
 torch
-tensorflow
-numpy
-pandas
-matplotlib
-opencv-python
+torchvision
+transformers

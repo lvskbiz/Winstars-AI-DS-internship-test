@@ -11,3 +11,8 @@ __pycache__/
 # Віртуальне оточення
 venv/
 .env/
+
+# Local data and generated model artifacts
+data/
+artifacts/
+Task 1/.cache/
