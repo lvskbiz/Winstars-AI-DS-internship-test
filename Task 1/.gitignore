@@ -1,0 +1,7 @@
+src/
+main.py
+mnist_classifier_interface.py
+random_forest_classifier.py
+feed_forward_nn_classifier.py
+cnn_classifier.py
+mnist_classifier.py
