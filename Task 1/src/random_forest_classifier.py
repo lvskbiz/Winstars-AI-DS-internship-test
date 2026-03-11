@@ -1,23 +1,11 @@
 from __future__ import annotations
 
 from mnist_classifier_interface import MnistClassifierInterface
-
-try:
-    from sklearn.ensemble import RandomForestClassifier as SklearnRandomForestClassifier
-except ImportError as exc:  # pragma: no cover
-    SklearnRandomForestClassifier = None
-    SKLEARN_IMPORT_ERROR = exc
-else:
-    SKLEARN_IMPORT_ERROR = None
+from sklearn.ensemble import RandomForestClassifier as SklearnRandomForestClassifier
 
 
 class RandomForestClassifier(MnistClassifierInterface):
     def __init__(self, n_estimators: int = 150, random_state: int = 42):
-        if SklearnRandomForestClassifier is None:  # pragma: no cover
-            raise ImportError(
-                "scikit-learn is required for RandomForestClassifier. "
-                "Install dependencies from Task 1/requirements.txt."
-            ) from SKLEARN_IMPORT_ERROR
         self.model = SklearnRandomForestClassifier(
             n_estimators=n_estimators,
             random_state=random_state,

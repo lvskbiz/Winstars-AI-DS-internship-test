@@ -8,6 +8,19 @@ import torch
 from PIL import Image
 from torchvision import models, transforms
 
+NORMALIZE_MEAN = [0.485, 0.456, 0.406]
+NORMALIZE_STD = [0.229, 0.224, 0.225]
+
+
+def build_transform():
+    return transforms.Compose(
+        [
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(NORMALIZE_MEAN, NORMALIZE_STD),
+        ]
+    )
+
 
 def load_model(model_dir: str | Path, device):
     model_dir = Path(model_dir)
@@ -23,15 +36,8 @@ def load_model(model_dir: str | Path, device):
 def predict_image(image_path: str | Path, model_dir: str | Path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, class_names = load_model(model_dir, device)
-    transform = transforms.Compose(
-        [
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-        ]
-    )
     image = Image.open(image_path).convert("RGB")
-    tensor = transform(image).unsqueeze(0).to(device)
+    tensor = build_transform()(image).unsqueeze(0).to(device)
     with torch.no_grad():
         prediction = model(tensor).argmax(dim=1).item()
     return class_names[prediction]

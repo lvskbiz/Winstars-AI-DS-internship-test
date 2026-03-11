@@ -13,6 +13,8 @@ from transformers import (
     TrainingArguments,
 )
 
+LABELS = ["O", "B-ANIMAL", "I-ANIMAL"]
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Train a transformer NER model for animal extraction.")
@@ -27,12 +29,8 @@ def parse_args():
 
 
 def load_jsonl(path: Path):
-    samples = []
     with path.open("r", encoding="utf-8") as handle:
-        for line in handle:
-            if line.strip():
-                samples.append(json.loads(line))
-    return samples
+        return [json.loads(line) for line in handle if line.strip()]
 
 
 def align_labels(batch, tokenizer, label_to_id):
@@ -58,32 +56,30 @@ def align_labels(batch, tokenizer, label_to_id):
     return tokenized
 
 
+def tokenize_dataset(dataset, tokenizer, label_to_id):
+    return dataset.map(
+        align_labels,
+        batched=True,
+        fn_kwargs={"tokenizer": tokenizer, "label_to_id": label_to_id},
+        remove_columns=dataset.column_names,
+    )
+
+
 def main():
     args = parse_args()
-    label_list = ["O", "B-ANIMAL", "I-ANIMAL"]
-    label_to_id = {label: index for index, label in enumerate(label_list)}
+    label_to_id = {label: index for index, label in enumerate(LABELS)}
 
     train_dataset = Dataset.from_list(load_jsonl(args.train_file))
     valid_dataset = Dataset.from_list(load_jsonl(args.valid_file))
 
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
-    tokenized_train = train_dataset.map(
-        align_labels,
-        batched=True,
-        fn_kwargs={"tokenizer": tokenizer, "label_to_id": label_to_id},
-        remove_columns=train_dataset.column_names,
-    )
-    tokenized_valid = valid_dataset.map(
-        align_labels,
-        batched=True,
-        fn_kwargs={"tokenizer": tokenizer, "label_to_id": label_to_id},
-        remove_columns=valid_dataset.column_names,
-    )
+    tokenized_train = tokenize_dataset(train_dataset, tokenizer, label_to_id)
+    tokenized_valid = tokenize_dataset(valid_dataset, tokenizer, label_to_id)
 
     model = AutoModelForTokenClassification.from_pretrained(
         args.model_name,
-        num_labels=len(label_list),
-        id2label={index: label for index, label in enumerate(label_list)},
+        num_labels=len(LABELS),
+        id2label={index: label for index, label in enumerate(LABELS)},
         label2id=label_to_id,
     )
 

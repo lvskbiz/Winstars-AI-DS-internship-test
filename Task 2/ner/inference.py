@@ -29,6 +29,11 @@ CANONICAL_ANIMALS = {
 }
 
 
+def normalize_animal(token: str) -> str:
+    normalized = token.lower().strip()
+    return CANONICAL_ANIMALS.get(normalized, normalized)
+
+
 def extract_animals(text: str, model_dir: str | Path):
     ner = pipeline(
         task="token-classification",
@@ -36,14 +41,12 @@ def extract_animals(text: str, model_dir: str | Path):
         tokenizer=str(model_dir),
         aggregation_strategy="simple",
     )
-    animals = []
-    for entity in ner(text):
-        if entity.get("entity_group") != "ANIMAL":
-            continue
-        normalized = entity["word"].lower().strip()
-        canonical = CANONICAL_ANIMALS.get(normalized, normalized)
-        animals.append(canonical)
-    return sorted(set(animals))
+    animals = {
+        normalize_animal(entity["word"])
+        for entity in ner(text)
+        if entity.get("entity_group") == "ANIMAL"
+    }
+    return sorted(animals)
 
 
 def parse_args():

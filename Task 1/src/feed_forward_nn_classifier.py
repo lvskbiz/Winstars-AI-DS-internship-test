@@ -1,23 +1,11 @@
 from __future__ import annotations
 
 from mnist_classifier_interface import MnistClassifierInterface
-
-try:
-    import tensorflow as tf
-except ImportError as exc:  # pragma: no cover
-    tf = None
-    TENSORFLOW_IMPORT_ERROR = exc
-else:
-    TENSORFLOW_IMPORT_ERROR = None
+import tensorflow as tf
 
 
 class FeedForwardNNClassifier(MnistClassifierInterface):
     def __init__(self, input_shape=(28, 28), num_classes: int = 10):
-        if tf is None:  # pragma: no cover
-            raise ImportError(
-                "TensorFlow is required for FeedForwardNNClassifier. "
-                "Install dependencies from Task 1/requirements.txt."
-            ) from TENSORFLOW_IMPORT_ERROR
         self.model = tf.keras.Sequential(
             [
                 tf.keras.layers.Input(shape=input_shape),
@@ -35,13 +23,15 @@ class FeedForwardNNClassifier(MnistClassifierInterface):
         )
 
     def train(self, X_train, y_train, epochs: int = 5, batch_size: int = 128, **kwargs):
+        verbose = kwargs.get("verbose", 1)
+        validation_split = kwargs.get("validation_split", 0.1)
         self.model.fit(
             X_train,
             y_train,
             epochs=epochs,
             batch_size=batch_size,
-            verbose=kwargs.get("verbose", 1),
-            validation_split=kwargs.get("validation_split", 0.1),
+            verbose=verbose,
+            validation_split=validation_split,
         )
         return self
 

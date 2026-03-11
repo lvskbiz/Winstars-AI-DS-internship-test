@@ -42,6 +42,10 @@ NEGATIVE_TEMPLATES = [
 ]
 
 
+def make_row(tokens, ner_tags, label):
+    return {"tokens": tokens, "ner_tags": ner_tags, "label": label}
+
+
 def to_bio(tokens, entity_tokens):
     labels = ["O"] * len(tokens)
     for start in range(len(tokens) - len(entity_tokens) + 1):
@@ -53,6 +57,13 @@ def to_bio(tokens, entity_tokens):
     raise ValueError(f"Could not align entity tokens {entity_tokens} in sentence {tokens}")
 
 
+def merge_labels(base_labels, new_labels):
+    return [
+        current if current != "O" else candidate
+        for current, candidate in zip(base_labels, new_labels)
+    ]
+
+
 def build_positive_examples(rng: random.Random):
     samples = []
     for canonical, aliases in ANIMALS.items():
@@ -60,7 +71,7 @@ def build_positive_examples(rng: random.Random):
             for template in TEMPLATES:
                 tokens = template.format(animal=alias).split()
                 entity_tokens = alias.split()
-                samples.append({"tokens": tokens, "ner_tags": to_bio(tokens, entity_tokens), "label": canonical})
+                samples.append(make_row(tokens, to_bio(tokens, entity_tokens), canonical))
     animal_names = list(ANIMALS)
     for animal_a in animal_names:
         for animal_b in animal_names:
@@ -75,16 +86,16 @@ def build_positive_examples(rng: random.Random):
             for alias in (alias_a, alias_b):
                 entity_tokens = alias.split()
                 entity_labels = to_bio(tokens, entity_tokens)
-                labels = [
-                    current if current != "O" else candidate
-                    for current, candidate in zip(labels, entity_labels)
-                ]
-            samples.append({"tokens": tokens, "ner_tags": labels, "label": f"{animal_a},{animal_b}"})
+                labels = merge_labels(labels, entity_labels)
+            samples.append(make_row(tokens, labels, f"{animal_a},{animal_b}"))
     return samples
 
 
 def build_negative_examples():
-    return [{"tokens": sentence.split(), "ner_tags": ["O"] * len(sentence.split()), "label": "none"} for sentence in NEGATIVE_TEMPLATES]
+    return [
+        make_row(sentence.split(), ["O"] * len(sentence.split()), "none")
+        for sentence in NEGATIVE_TEMPLATES
+    ]
 
 
 def write_jsonl(path: Path, rows):
@@ -117,14 +128,7 @@ def main():
     write_jsonl(args.output_dir / "valid.jsonl", rows[train_end:valid_end])
     write_jsonl(args.output_dir / "test.jsonl", rows[valid_end:])
 
-    print(
-        {
-            "train": train_end,
-            "valid": valid_end - train_end,
-            "test": total - valid_end,
-            "total": total,
-        }
-    )
+    print({"train": train_end, "valid": valid_end - train_end, "test": total - valid_end, "total": total})
 
 
 if __name__ == "__main__":

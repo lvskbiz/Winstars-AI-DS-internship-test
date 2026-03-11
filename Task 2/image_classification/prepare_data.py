@@ -22,6 +22,10 @@ CLASS_MAP = {
 }
 
 
+def normalize_label(raw_label: str) -> str:
+    return CLASS_MAP.get(raw_label.lower(), raw_label.lower())
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Download and split the Animals-10 dataset into folders.")
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -41,8 +45,7 @@ def main():
     grouped_indices = defaultdict(list)
     label_feature = dataset.features["label"]
     for index, sample in enumerate(dataset):
-        raw_label = label_feature.int2str(sample["label"])
-        label = CLASS_MAP.get(raw_label.lower(), raw_label.lower())
+        label = normalize_label(label_feature.int2str(sample["label"]))
         grouped_indices[label].append(index)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
