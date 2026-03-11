@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from mnist_classifier_interface import MnistClassifierInterface
+from .mnist_classifier_interface import MnistClassifierInterface
 import tensorflow as tf
 
 

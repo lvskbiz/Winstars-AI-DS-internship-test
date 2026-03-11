@@ -1,6 +1,6 @@
-from cnn_classifier import CNNClassifier
-from feed_forward_nn_classifier import FeedForwardNNClassifier
-from random_forest_classifier import RandomForestClassifier
+from .cnn_classifier import CNNClassifier
+from .feed_forward_nn_classifier import FeedForwardNNClassifier
+from .random_forest_classifier import RandomForestClassifier
 
 ALGORITHMS = {
     "rf": RandomForestClassifier,

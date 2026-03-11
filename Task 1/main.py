@@ -2,19 +2,16 @@ from __future__ import annotations
 
 import argparse
 import os
-import sys
 from importlib import import_module
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-SRC_DIR = PROJECT_ROOT / "src"
-sys.path.insert(0, str(SRC_DIR))
 os.environ.setdefault("MPLCONFIGDIR", str(PROJECT_ROOT / ".cache" / "matplotlib"))
 
-from mnist_classifier import MnistClassifier
 import numpy as np
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from src.mnist_classifier import MnistClassifier
 
 
 def load_mnist(dataset_source: str):
