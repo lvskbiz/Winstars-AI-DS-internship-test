@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+from importlib import import_module
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -27,7 +28,7 @@ def load_mnist(dataset_source: str):
         return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
     local_mnist_path = PROJECT_ROOT / ".cache" / "mnist.npz"
-    if local_mnist_path.exists() and dataset_source != "openml":
+    if local_mnist_path.exists() and dataset_source in {"auto", "keras"}:
         with np.load(local_mnist_path) as data:
             X_train = data["x_train"]
             y_train = data["y_train"]
@@ -35,10 +36,9 @@ def load_mnist(dataset_source: str):
             y_test = data["y_test"]
         return X_train, X_test, y_train, y_test
 
-    if dataset_source != "openml":
+    if dataset_source in {"auto", "keras"}:
         try:
-            from tensorflow.keras.datasets import mnist
-
+            mnist = import_module("tensorflow.keras.datasets").mnist
             (X_train, y_train), (X_test, y_test) = mnist.load_data()
             return X_train, X_test, y_train, y_test
         except Exception:
