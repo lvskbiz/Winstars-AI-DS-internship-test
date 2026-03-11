@@ -8,7 +8,7 @@ __pycache__/
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
-# Віртуальне оточення
+# Virtual environments
 venv/
 .env/
 

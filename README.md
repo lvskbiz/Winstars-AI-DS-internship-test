@@ -11,6 +11,11 @@ This repository contains both tasks from the internship assignment, each isolate
 │   ├── main.py
 │   ├── requirements.txt
 │   └── src/
+├── docs/
+│   ├── code_structure_guide.md
+│   └── code_structure_guide.pdf
+├── scripts/
+│   └── generate_pdf.py
 └── Task 2/
     ├── README.md
     ├── eda.ipynb
@@ -42,3 +47,4 @@ Implements an NLP + Computer Vision pipeline:
 
 - All runnable details for each task are documented inside the corresponding task folder.
 - The notebook in `Task 2` is focused on EDA and demo usage, while training and inference stay in parametrized `.py` scripts as required by the assignment.
+- `docs/code_structure_guide.md` and its PDF version provide a compact walkthrough of the repository structure for faster review.

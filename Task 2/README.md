@@ -6,6 +6,8 @@ This task contains two independent models and one orchestration script:
 - an image classification model that predicts the animal class in an image;
 - a pipeline that compares both outputs and returns a boolean value.
 
+The repository keeps generated datasets and trained model artifacts out of version control, but the current workspace already contains one reproducible local run under `data/` and `artifacts/`.
+
 ## Expected structure
 
 ```text
@@ -31,12 +33,16 @@ Task 2/
 The image dataset should contain at least 10 animal classes and be split as:
 
 ```text
-dataset/
+data/animals/
 ├── train/
 │   ├── bear/
 │   ├── cat/
 │   └── ...
-└── valid/
+├── valid/
+│   ├── bear/
+│   ├── cat/
+│   └── ...
+└── test/
     ├── bear/
     ├── cat/
     └── ...
@@ -108,15 +114,15 @@ Image classification:
 ```bash
 python3 "Task 2/image_classification/inference.py" \
   --model-dir artifacts/image_model \
-  --image-path samples/cow.jpg
+  --image-path data/animals/test/butterfly/butterfly_0001.jpg
 ```
 
 Full pipeline:
 
 ```bash
 python3 "Task 2/pipeline.py" \
-  --text "There is a cow in the picture." \
-  --image-path samples/cow.jpg \
+  --text "There is a butterfly in the picture." \
+  --image-path data/animals/test/butterfly/butterfly_0001.jpg \
   --ner-model-dir artifacts/ner_model \
   --image-model-dir artifacts/image_model
 ```
@@ -137,12 +143,18 @@ The repository now includes a small reproducible run using:
 - `distilbert/distilbert-base-uncased` fine-tuned for NER for 2 epochs;
 - `resnet18` trained from scratch for 3 epochs on the reduced image dataset.
 
-Observed outputs from the local run:
+Observed outputs from the local run in this workspace:
 
 - NER example: `"There is a cow in the picture." -> ["cow"]`
 - NER validation loss after epoch 2: `0.0005027`
 - Image classifier test accuracy on the reduced subset: `0.27`
-- Pipeline example:
-  `"There is a butterfly in the picture." + data/animals/test/butterfly/butterfly_0000.jpg -> True`
+- Reproducible pipeline example:
+  `"There is a butterfly in the picture." + data/animals/test/butterfly/butterfly_0001.jpg -> True`
 
-The image classifier accuracy is a baseline obtained without pretrained weights because the local environment failed to download the torchvision checkpoint due SSL certificate issues. In a normal environment, rerunning with `--pretrained`, more images per class, and more epochs should improve the result substantially.
+The image classifier accuracy is a baseline obtained without pretrained weights because the local environment failed to download the torchvision checkpoint due to SSL certificate issues. In a normal environment, rerunning with `--pretrained`, more images per class, and more epochs should improve the result substantially.
+
+## Final remarks
+
+- The NER dataset is synthetic and template-based by design, which makes the training pipeline fully reproducible but limits linguistic diversity.
+- The CV model is presented as a baseline rather than a heavily tuned final classifier.
+- For review, the most important requirement is covered: both models are trainable from scripts and integrated into one working boolean pipeline.
