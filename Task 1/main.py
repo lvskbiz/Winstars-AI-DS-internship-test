@@ -3,26 +3,17 @@ from __future__ import annotations
 import argparse
 import os
 import sys
-import tempfile
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 SRC_DIR = PROJECT_ROOT / "src"
 sys.path.insert(0, str(SRC_DIR))
-os.environ.setdefault("MPLCONFIGDIR", tempfile.mkdtemp(prefix="matplotlib-"))
+os.environ.setdefault("MPLCONFIGDIR", str(PROJECT_ROOT / ".cache" / "matplotlib"))
 
 from mnist_classifier import MnistClassifier
-
-try:
-    import numpy as np
-except ImportError as exc:  # pragma: no cover
-    raise ImportError("NumPy is required to run Task 1.") from exc
-
-try:
-    from sklearn.metrics import accuracy_score
-    from sklearn.model_selection import train_test_split
-except ImportError as exc:  # pragma: no cover
-    raise ImportError("scikit-learn is required to run Task 1.") from exc
+import numpy as np
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
 
 
 def load_mnist(dataset_source: str):
@@ -36,7 +27,7 @@ def load_mnist(dataset_source: str):
         return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
     local_mnist_path = PROJECT_ROOT / ".cache" / "mnist.npz"
-    if local_mnist_path.exists() and dataset_source in {"auto", "keras"}:
+    if local_mnist_path.exists() and dataset_source != "openml":
         with np.load(local_mnist_path) as data:
             X_train = data["x_train"]
             y_train = data["y_train"]
@@ -44,15 +35,15 @@ def load_mnist(dataset_source: str):
             y_test = data["y_test"]
         return X_train, X_test, y_train, y_test
 
-    try:
-        if dataset_source in {"auto", "keras"}:
+    if dataset_source != "openml":
+        try:
             from tensorflow.keras.datasets import mnist
 
             (X_train, y_train), (X_test, y_test) = mnist.load_data()
             return X_train, X_test, y_train, y_test
-    except Exception:
-        if dataset_source == "keras":
-            raise
+        except Exception:
+            if dataset_source == "keras":
+                raise
 
     from sklearn.datasets import fetch_openml
 
@@ -73,11 +64,27 @@ def load_mnist(dataset_source: str):
 def prepare_features(algorithm: str, X_train, X_test):
     X_train = X_train.astype("float32") / 255.0
     X_test = X_test.astype("float32") / 255.0
+
     if algorithm == "rf":
         return X_train.reshape(len(X_train), -1), X_test.reshape(len(X_test), -1)
+
     if algorithm == "cnn":
         return X_train[..., np.newaxis], X_test[..., np.newaxis]
+
     return X_train, X_test
+
+
+def apply_sample_limit(X_train, X_test, y_train, y_test, sample_size: int | None):
+    if sample_size is None:
+        return X_train, X_test, y_train, y_test
+
+    test_size = max(1000, sample_size // 5)
+    return (
+        X_train[:sample_size],
+        X_test[:test_size],
+        y_train[:sample_size],
+        y_test[:test_size],
+    )
 
 
 def run_experiment(
@@ -88,12 +95,9 @@ def run_experiment(
     dataset_source: str,
 ):
     X_train, X_test, y_train, y_test = load_mnist(dataset_source)
-
-    if sample_size is not None:
-        X_train = X_train[:sample_size]
-        y_train = y_train[:sample_size]
-        X_test = X_test[: max(1000, sample_size // 5)]
-        y_test = y_test[: max(1000, sample_size // 5)]
+    X_train, X_test, y_train, y_test = apply_sample_limit(
+        X_train, X_test, y_train, y_test, sample_size
+    )
 
     X_train, X_test = prepare_features(algorithm, X_train, X_test)
     classifier = MnistClassifier(algorithm)
