@@ -10,6 +10,7 @@ This task implements three MNIST classifiers behind the same interface:
 
 ```text
 Task 1/
+├── demo.ipynb
 ├── main.py
 ├── requirements.txt
 └── src/
@@ -65,3 +66,7 @@ python3 "Task 1/main.py" --algorithm rf --dataset-source keras --sample-size 500
 Observed result on the sampled MNIST subset:
 
 - `rf` test accuracy: `0.9340`
+
+## Demo notebook
+
+- `demo.ipynb` provides a compact walkthrough of the Task 1 API, feature preparation, a smoke-test run, and edge cases to discuss during review.
