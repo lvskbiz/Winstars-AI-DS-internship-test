@@ -1,0 +1,204 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" compressed="false" version="29.6.1">
+  <diagram id="project-structure" name="Project Structure">
+    <mxGraphModel dx="2377" dy="1520" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="proj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;gradientColor=#7ea6e0;" value="Winstars AI DS internship test" vertex="1">
+          <mxGeometry height="60" width="300" x="610" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="task1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontStyle=1;fontColor=#ffffff;" value="Task 1&#xa;MNIST Classification" vertex="1">
+          <mxGeometry height="70" width="240" x="220" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="task2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcd28;strokeColor=#d79b00;fontStyle=1;gradientColor=#ffa500;" value="Task 2&#xa;NER + Image Classification" vertex="1">
+          <mxGeometry height="70" width="260" x="1235" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="docs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e51400;strokeColor=#B20000;fontColor=#ffffff;" value="docs" vertex="1">
+          <mxGeometry height="50" width="130" x="1575" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="scripts" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e51400;strokeColor=#B20000;fontColor=#ffffff;" value="scripts" vertex="1">
+          <mxGeometry height="50" width="130" x="1755" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="t1main" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="main.py&#xa;entry point" vertex="1">
+          <mxGeometry height="60" width="140" x="30" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t1readme" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="README.md" vertex="1">
+          <mxGeometry height="60" width="140" x="190" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t1req" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="requirements.txt" vertex="1">
+          <mxGeometry height="60" width="140" x="350" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t1demo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="demo.ipynb" vertex="1">
+          <mxGeometry height="60" width="140" x="510" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t1src" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontStyle=1;fontColor=#ffffff;" value="src" vertex="1">
+          <mxGeometry height="60" width="140" x="240" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="iface" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="mnist_classifier_interface.py" vertex="1">
+          <mxGeometry height="60" width="200" x="10" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatcher" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="mnist_classifier.py" vertex="1">
+          <mxGeometry height="60" width="180" x="230" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="rf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="random_forest_classifier.py" vertex="1">
+          <mxGeometry height="60" width="210" x="430" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="ffnn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="feed_forward_nn_classifier.py" vertex="1">
+          <mxGeometry height="60" width="220" x="10" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="cnn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="cnn_classifier.py" vertex="1">
+          <mxGeometry height="60" width="180" x="260" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="t2readme" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="README.md" vertex="1">
+          <mxGeometry height="60" width="130" x="710" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t2req" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="requirements.txt" vertex="1">
+          <mxGeometry height="60" width="130" x="860" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t2eda" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="eda.ipynb" vertex="1">
+          <mxGeometry height="60" width="130" x="1010" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="pipeline" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcd28;strokeColor=#d79b00;fontStyle=1;gradientColor=#ffa500;" value="pipeline.py" vertex="1">
+          <mxGeometry height="60" width="140" x="1510" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="ner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcd28;strokeColor=#d79b00;fontStyle=1;gradientColor=#ffa500;" value="ner" vertex="1">
+          <mxGeometry height="60" width="120" x="1170" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="imgcls" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcd28;strokeColor=#d79b00;fontStyle=1;gradientColor=#ffa500;" value="image_classification" vertex="1">
+          <mxGeometry height="60" width="190" x="1300" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="nerprep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="prepare_data.py" vertex="1">
+          <mxGeometry height="60" width="140" x="960" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="nertrain" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="train.py" vertex="1">
+          <mxGeometry height="60" width="120" x="810" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="nerinfer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="inference.py" vertex="1">
+          <mxGeometry height="60" width="130" x="1120" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="imgprep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="prepare_data.py" vertex="1">
+          <mxGeometry height="60" width="140" x="1182.5" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="imgtrain" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="train.py" vertex="1">
+          <mxGeometry height="60" width="120" x="1337.5" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="imginfer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="inference.py" vertex="1">
+          <mxGeometry height="60" width="130" x="1477.5" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="data" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;" value="data&#xa;animals + ner datasets" vertex="1">
+          <mxGeometry height="70" width="180" x="1755" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="artifacts" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;" value="artifacts&#xa;trained models" vertex="1">
+          <mxGeometry height="70" width="180" x="1755" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="docguide" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="code_structure_guide.md / .pdf" vertex="1">
+          <mxGeometry height="50" width="190" x="1540" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="scriptpdf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="generate_pdf.py" vertex="1">
+          <mxGeometry height="50" width="150" x="1755" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="proj" style="endArrow=block;html=1;rounded=0;" target="task1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="proj" style="endArrow=block;html=1;rounded=0;" target="task2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="proj" style="endArrow=block;html=1;rounded=0;" target="docs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="proj" style="endArrow=block;html=1;rounded=0;" target="scripts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="task1" style="endArrow=block;html=1;" target="t1main">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="task1" style="endArrow=block;html=1;" target="t1readme">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="task1" style="endArrow=block;html=1;" target="t1req">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="task1" style="endArrow=block;html=1;" target="t1demo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="task1" style="endArrow=block;html=1;" target="t1src">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="t1src" style="endArrow=block;html=1;" target="iface">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="t1src" style="endArrow=block;html=1;" target="dispatcher">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="t1src" style="endArrow=block;html=1;" target="rf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="t1src" style="endArrow=block;html=1;" target="ffnn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="t1src" style="endArrow=block;html=1;" target="cnn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="task2" style="endArrow=block;html=1;" target="t2readme">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="task2" style="endArrow=block;html=1;" target="t2req">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="task2" style="endArrow=block;html=1;" target="t2eda">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="task2" style="endArrow=block;html=1;" target="pipeline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="task2" style="endArrow=block;html=1;" target="ner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="task2" style="endArrow=block;html=1;" target="imgcls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="ner" style="endArrow=block;html=1;" target="nerprep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="ner" style="endArrow=block;html=1;" target="nertrain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="ner" style="endArrow=block;html=1;" target="nerinfer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="imgcls" style="endArrow=block;html=1;" target="imgprep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="imgcls" style="endArrow=block;html=1;" target="imgtrain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="imgcls" style="endArrow=block;html=1;" target="imginfer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="docs" style="endArrow=block;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1640.0000000000005" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="scripts" style="endArrow=block;html=1;" target="scriptpdf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e29" edge="1" parent="1" source="task2" style="dashed=1;endArrow=block;html=1;" target="data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="task2" style="dashed=1;endArrow=block;html=1;" target="artifacts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" edge="1" parent="1" source="data" style="dashed=1;endArrow=block;html=1;" target="nerprep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e32" edge="1" parent="1" source="data" style="dashed=1;endArrow=block;html=1;" target="imgprep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e33" edge="1" parent="1" source="artifacts" style="dashed=1;endArrow=block;html=1;" target="pipeline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
